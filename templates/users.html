@@ -5,12 +5,12 @@ Users
 {% endblock %} 
 
 {% block content %}
-<ul>
+<div class="col list-group">
     {% for user in users %}
-    <li><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
+    <a href="/users/{{user.id}}" class="list-group-item list-group-item-action" aria-current="true">{{user.first_name}} {{user.last_name}}</a>
     {% endfor %}
-</ul>
-<form action="/users/new">
-    <button type="submit" href>Add User</button>
-</form>
-{% endblock %}  
+    <form class="mt-2" action="/users/new">
+        <button type="submit" class="btn btn-primary">Add User</button>
+    </form>
+</div>
+{% endblock %} 

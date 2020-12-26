@@ -5,13 +5,22 @@ Edit a User
 {% endblock %}
 
 {% block content %}
-<form action="/users/{{user.id}}/edit" method="post">
-    <label for="f_name">First Name</label>
-    <input type="text" name="f_name" id="f_name" value="{{user.first_name}}" required>
-    <label for="l_name">Last Name</label>
-    <input type="text" name="l_name" id="l_name" value="{{user.last_name}}" required>
-    <label for="i_url">Image URL</label>
-    <input type="url" name="i_url" id="i_url" value="{{user.img_url}}">
-    <button type="submit" href>Save</button>
-</form>
+<div class="col">
+    <form action="/users/{{user.id}}/edit" method="post">
+        <div class="mb-3">
+            <label for="f_name" class="form-label">First Name</label>
+            <input type="text" name="f_name" id="f_name" class="form-control" value="{{user.first_name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="l_name" class="form-label">Last Name</label>
+            <input type="text" name="l_name" id="l_name" class="form-control" value="{{user.last_name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="i_url" class="form-label">Image URL</label>
+            <input type="url" name="i_url" id="i_url" class="form-control" value="{{user.img_url}}">
+        </div>    
+        <a href="/users/{{user.id}}" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
 {% endblock %}

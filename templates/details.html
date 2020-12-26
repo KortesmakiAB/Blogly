@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<img src="{{user.img_url}}" alt="user image">
-<form action="/users/{{user.id}}/edit">
-    <button>Edit</button>
-</form>
-<form action="/users/{{user.id}}/delete" method="post">
-    <button type="submit">Delete</button>
-</form>
+<div class="col">
+    <img src="{{user.img_url}}" class="img-thumbnail" alt="user image">
+</div>
+<div class="col d-flex align-items-end">
+    <form action="/users/{{user.id}}/delete" method="post">
+        <a href="/users" class="btn btn-outline-secondary">Cancel</a>
+        <a href="/users/{{user.id}}/edit" class="btn btn-success">Edit</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
 {% endblock %}

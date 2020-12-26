@@ -5,15 +5,22 @@ Create a User
 {% endblock %} 
 
 {% block content %}
-<div>
+<div class="col">
     <form action="/users/new" method="POST">
-        <label for="f_name">First Name</label>
-        <input type="text" name="f_name" id="f_name" placeholder="Enter a first name" required>
-        <label for="l_name">Last Name</label>
-        <input type="text" name="l_name" id="l_name" placeholder="Enter a last name" required>
-        <label for="i_url">Image URL</label>
-        <input type="url" name="i_url" id="i_url" placeholder="Provide an image of this user">
-        <button type="submit">Add</button>
+        <div class="mb-3">
+            <label for="f_name" class="form-label">First Name</label>
+            <input type="text" name="f_name" id="f_name" class="form-control" placeholder="Enter a first name" required>
+        </div>
+        <div class="mb-3">
+            <label for="l_name" class="form-label">Last Name</label>
+            <input type="text" name="l_name" id="l_name" class="form-control" placeholder="Enter a last name" required>
+        </div>
+        <div class="mb-3">
+            <label for="i_url" class="form-label">Image URL</label>
+            <input type="url" name="i_url" id="i_url" class="form-control" placeholder="Provide an image of this user">
+        </div>
+        <a href="/users" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Add</button>
     </form>    
 </div>
 {% endblock %}  
