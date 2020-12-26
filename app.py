@@ -22,29 +22,29 @@ def home_page():
 
 @app.route('/users')
 def display_users():
-    """TODO"""
+    """Display a list of users"""
 
     users = User.query.all()
     return render_template('users.html', users=users)
 
 @app.route('/users/new')
 def new_user_form():
-    """TODO"""
+    """Display a form to add a new user"""
 
     return render_template('new_user.html')
 
 @app.route('/users/new', methods=['POST'])
 def add_new_user():
-    """TODO"""
+    """Add new user to users table"""
 
     f_name = request.form['f_name']
     l_name = request.form['l_name']
     img_url = request.form['i_url']
     if img_url == '':
-        img_url = '/static/captainunderpants.png'
+        img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
     
     new_user = User(first_name=f_name, last_name=l_name, img_url=img_url)
-    # raise
+
     db.session.add(new_user)
     db.session.commit()
     
@@ -52,7 +52,7 @@ def add_new_user():
 
 @app.route('/users/<int:user_id>')
 def show_details(user_id):
-    """TODO"""
+    """Display user details"""
 
     user = User.query.get_or_404(user_id)
 
@@ -60,7 +60,7 @@ def show_details(user_id):
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user_form(user_id):
-    """TODO"""
+    """Display user info. Allow user info to be edited"""
 
     user = User.query.get_or_404(user_id)
 
@@ -68,13 +68,13 @@ def edit_user_form(user_id):
 
 @app.route('/users/<int:user_id>/edit', methods=['POST'])
 def edit_user(user_id):
-    """TODO"""
+    """Update users table with edited user info"""
 
     f_name = request.form['f_name']
     l_name = request.form['l_name']
     img_url = request.form['i_url']
     if img_url == '':
-        img_url = '/static/captainunderpants.png'
+        img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
 
     user = User.query.get_or_404(user_id)
     user.first_name = f_name
@@ -89,7 +89,7 @@ def edit_user(user_id):
 
 @app.route('/users/<int:user_id>/delete', methods=['POST'])
 def delete_user(user_id):
-    """TODO"""
+    """Delete a user from users table"""
 
     User.query.filter_by(id = user_id).delete()
     db.session.commit()
