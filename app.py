@@ -41,7 +41,9 @@ def add_new_user():
     l_name = request.form['l_name']
     img_url = request.form['i_url']
     if img_url == '':
-        img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
+        img_url = 'https://www.baltimoresun.com/resizer/sESny2X0OQREJK5HFvv0k3sh9DA=/415x383/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/YLOX2SB7L5BOXAM742HV427NK4.jpg'
+        # img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/c/c1/Capt-character-captainunderpants.png/revision/latest?cb=20200503124947'
+        # img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
     
     new_user = User(first_name=f_name, last_name=l_name, img_url=img_url)
 
@@ -74,7 +76,9 @@ def edit_user(user_id):
     l_name = request.form['l_name']
     img_url = request.form['i_url']
     if img_url == '':
-        img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
+        img_url = 'https://www.baltimoresun.com/resizer/sESny2X0OQREJK5HFvv0k3sh9DA=/415x383/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/YLOX2SB7L5BOXAM742HV427NK4.jpg'
+        # img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/c/c1/Capt-character-captainunderpants.png/revision/latest?cb=20200503124947'
+        # img_url = 'https://static.wikia.nocookie.net/captainunderpants/images/8/83/Capt-character-captainunderpants.jpg/revision/latest/scale-to-width-down/300?cb=20180714224749'
 
     user = User.query.get_or_404(user_id)
     user.first_name = f_name
