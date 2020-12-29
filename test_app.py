@@ -85,7 +85,7 @@ class BloglyFlaskTests(TestCase):
             
             self.assertEqual(resp.status_code, 200)
             self.assertIn('Brant', html)
-            self.assertIn('https://static.wikia.nocookie.net/captainunderpants', html)
+            self.assertIn('class="img-thumbnail" alt="user image">', html)
 
     def test_delete_user(self):
         """Post a new user, then delete said user"""

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="col">
+    <h1>{{post.title}}</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <blockquote class="blockquote">"{{post.content}}"</blockquote>
+    <p>By {{post.user_details.first_name}} {{post.user_details.last_name}}</p>
+    <span>Created: {{post.created_at}}</span>
+
+    <form action="/posts/{{post.id}}/delete" method="post" class="my-2">
+        <a href="/users/{{post.user_details.id}}" class="btn btn-outline-secondary">Cancel</a>
+        <a href="/posts/{{post.id}}/edit" class="btn btn-success">Edit</a>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+</div>
+{% endblock %}
+

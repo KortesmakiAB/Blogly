@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="col">
+    <h1>Add a post for {{user.first_name}} {{user.last_name}}</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <form action="/users/{{user.id}}/posts/new" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" class="form-control" placeholder="Add post title" required>
+        </div>  
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <input type="text" name="content" id="content" class="form-control" placeholder="Add post content" required>
+        </div>
+        <a href="/users/{{user.id}}" class="btn btn-outline-secondary">Cancel</a>
+        <button class="btn btn-success">Add</button>
+    </form>
+</div>
+{% endblock %}
