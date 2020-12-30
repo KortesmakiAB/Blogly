@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<div class="col">
+    <h1>Create a tag</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="col">
+    <form action="/tags/new" method="post">
+        <div class="mb-3">
+            <label for="t_name" class="form-label">Tag Name</label>
+            <input type="text" name="t_name" id="t_name" class="form-control" placeholder="Create a new tag" required>
+        </div>  
+        <a href="/tags" class="btn btn-outline-secondary">Cancel</a>
+        <button class="btn btn-success">Add</button>
+    </form>
+</div>
+{% endblock %}

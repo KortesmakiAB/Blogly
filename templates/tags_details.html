@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<small>Posts tagged with</small> "{{tag.name}}"
+{% endblock %}
+
+
+{% block content %}
+{% if tag %}
+<div class="col list-group">
+    {% for post in tag.posts %}
+    <a href="/posts/{{post.id}}" class="list-group-item list-group-item-action" aria-current="true">{{post.title}}</a>
+    {% endfor %}
+
+    <form action="/tags/{{tag.id}}/delete" method="post" class="my-2">
+        <a href="/tags" class="btn btn-outline-secondary">Cancel</a>
+        <a href="/tags/{{tag.id}}/edit" class="btn btn-outline-success">Edit Tag</a>
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

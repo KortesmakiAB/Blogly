@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block header%}
+<div class="col">
+    <h1>Tags</h1>
+</div>
+{% endblock%}
+
+
+{% block content %}
+{% if tags %}
+<div class="col list-group">
+    {% for tag in tags %}
+    <a href="/tags/{{tag.id}}" class="list-group-item list-group-item-action" aria-current="true">{{tag.name}}</a>
+    {% endfor %}
+    <form class="mt-2" action="/tags/new">
+        <button type="submit" class="btn btn-primary">Add Tag</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
