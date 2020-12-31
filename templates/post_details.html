@@ -11,6 +11,12 @@
     <blockquote class="blockquote">"{{post.content}}"</blockquote>
     <p>By {{post.user_details.first_name}} {{post.user_details.last_name}}</p>
     <span>Created: {{post.created_at}}</span>
+    <div class="my-3">
+        Tags:  
+        {% for tag in post.tagged_words %}
+        <a class="btn btn-primary btn-sm mx-1" href="/tags/{{tag.id}}">{{tag.name}}</a>
+        {% endfor %}
+    </div>
 
     <form action="/posts/{{post.id}}/delete" method="post" class="my-2">
         <a href="/users/{{post.user_details.id}}" class="btn btn-outline-secondary">Cancel</a>

@@ -16,9 +16,9 @@ debug = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-    """TODO"""
+    """Display Homepage"""
 
-    return redirect('/users')
+    return render_template('index.html')
 
 @app.route('/users')
 def display_users():
@@ -101,28 +101,37 @@ def delete_user(user_id):
     return redirect('/users')
 
 ###########################################################
-# Part Two
+# "posts" Routes
 
 @app.route('/users/<int:user_id>/posts/new')
 def new_post_form(user_id):
     """For the selected user, show form to add a post."""
 
     user = User.query.get_or_404(user_id)
+    tags = Tag.query.all()
 
-    return render_template('post_new.html', user=user)
+    return render_template('post_new.html', user=user, tags=tags)
 
 
 @app.route('/users/<int:user_id>/posts/new', methods=['POST'])
-def handle_add_form(user_id):
+def handle_add_post_form(user_id):
     """Add post and redirect to the user detail page"""
 
-    title = request.form.get('title')
+    # Naomi: I am still not quite sure what it looks like to write server side form vaidation. 
+    # How does this look??
     try:
-        content = request.form['content']
+        title = request.form.get('title')
+        content = request.form.get('content')
+        tags = request.form.getlist('cb')
     except:
-        return "invalid content"
+        return "invalid new post data submission"
     
     new_post = Post(title=title, content=content, user=user_id)
+
+    for tag in tags:
+        tag_from_form = db.session.query(Tag).filter_by(name = tag).one()
+        new_post.tagged_words.append(tag_from_form)
+
     db.session.add(new_post)
     db.session.commit()
 
@@ -132,7 +141,8 @@ def handle_add_form(user_id):
 @app.route('/posts/<int:post_id>')
 def display_post(post_id):
     """Show a post.
-    Show buttons to edit and delete the post."""
+    Show buttons to edit and delete the post.
+    Show tags which are also links to the tag details."""
 
     post = Post.query.get(post_id)
 
@@ -140,12 +150,13 @@ def display_post(post_id):
 
 
 @app.route('/posts/<int:post_id>/edit')
-def edit_post_form(post_id):
+def handle_edit_post_form(post_id):
     """Show form to edit a post, and to cancel (back to user page)."""
 
     post = Post.query.get_or_404(post_id)
+    tags = Tag.query.all()
 
-    return render_template('post_edit.html', post=post)
+    return render_template('post_edit.html', post=post, tags=tags)
 
 
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
@@ -154,10 +165,15 @@ def handle_post_edit(post_id):
 
     title = request.form['title']
     content = request.form['content']
-
+    
     p = Post.query.get(post_id)
     p.title = title
     p.content = content
+
+    tags = request.form.getlist('cb')
+    for tag in tags:
+        tag_from_form = db.session.query(Tag).filter_by(name = tag).one()
+        p.tagged_words.append(tag_from_form)
 
     db.session.add(p)
     db.session.commit()
@@ -178,7 +194,7 @@ def delete_post(post_id):
     return redirect(f'/users/{user_id}')
 
 ###########################################################
-# Part Three
+# "tag" Routes
 
 @app.route('/tags')
 def display_tags():

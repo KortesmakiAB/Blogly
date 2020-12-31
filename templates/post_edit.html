@@ -2,13 +2,13 @@
 
 {% block header %}
 <div class="col">
-    <h1>Edit Post</h1>
+    <h1>Edit Post <small>by {{post.user_details.first_name}}</small></h1>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="col">
-    <form action="/posts/{{post.user_details.id}}/edit" method="post">
+    <form action="/posts/{{post.id}}/edit" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" class="form-control" value="{{post.title}}" required>
@@ -17,7 +17,26 @@
             <label for="content" class="form-label">Content</label>
             <input type="text" name="content" id="content" class="form-control" value="{{post.content}}" required>
         </div>
-        <a href="/posts/{{post.user_details.id}}" class="btn btn-outline-secondary">Cancel</a>
+
+        {% if tags %}
+        <div class="my-2">
+            {% for tag in tags %}
+                {% if tag in post.tagged_words %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tagCheckBox{{tag.id}}" name="cb" value="{{tag.name}}" checked>
+                    <label class="form-check-label" for="tagCheckBox{{tag.id}}">{{tag.name}}</label>
+                </div>
+                {% else %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tagCheckBox{{tag.id}}" name="cb" value="{{tag.name}}">
+                    <label class="form-check-label" for="tagCheckBox{{tag.id}}">{{tag.name}}</label>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <a href="/posts/{{post.id}}" class="btn btn-outline-secondary">Cancel</a>
         <button class="btn btn-success">Save</button>
     </form>
 </div>
