@@ -12,6 +12,7 @@
     <a href="/users/{{user.id}}" class="list-group-item list-group-item-action" aria-current="true">{{user.first_name}} {{user.last_name}}</a>
     {% endfor %}
     <form class="mt-2" action="/users/new">
+        <a href="/" class="btn btn-outline-secondary">Home</a>
         <button type="submit" class="btn btn-primary">Add User</button>
     </form>
 </div>
