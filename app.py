@@ -1,16 +1,17 @@
 from flask import Flask, request, redirect, render_template
 from models import *
+import os 
+from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///blogly')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'PssssssssstPleaseDoNOOOOTTEll')
 
 connect_db(app)
 
-from flask_debugtoolbar import DebugToolbarExtension
-app.config['SECRET_KEY'] = "SECRET!"
 debug = DebugToolbarExtension(app)
 
 
